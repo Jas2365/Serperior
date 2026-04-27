@@ -17,16 +17,20 @@
 #include <defs.h>
 
 typedef struct string {
-    i8* str; 
     u64 length;
+    i8* str; 
 } string;
 
 typedef struct strvw {
-    const i8* str;
     u64 length;
+    const i8* str;
 } strvw;
 
+#define fmt_str "%.*s"
+
 #define string_lit(s) (string){ .str = s, .length = sizeof(s) -1 }
+
 string make_string(const i8* lit);
 
 string copy_string(string* cf, string* sf);
+b8 is_string_eq(string* a, string* b);

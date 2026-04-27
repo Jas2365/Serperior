@@ -19,8 +19,9 @@
 #define char_slash   (1 << 2) // '/'
 #define char_alpha   (1 << 3) //  A-Z a-z 
 #define char_digit   (1 << 4) //  0-9
-#define char_ident   (1 << 5) //  alpha + digit + _
-#define char_symbol  (1 << 6) //  + - *
+#define char_symbol  (1 << 5) //  + - *
+#define char_tick    (1 << 6) // '
+#define char_string  (1 << 7) // string ""
 
 #define char_is(c, flag) (char_class[(u8)(c)] & (flag))
 
@@ -28,7 +29,7 @@
 #define char_tab        ( '\t' )
 #define char_cr         ( '\r' )
 #define char_nl         ( '\n' )
-#define char_slash      ( '/'  )
+#define char_sl         ( '/'  )
 
 #define char_parenl     ( '(' )
 #define char_parenr     ( ')' )
@@ -101,7 +102,8 @@
 #define char_Y ( 'Y' )
 #define char_Z ( 'Z' )
 
-#define char_us ( '_' ) // underscore
+// underscore
+#define char_us ( '_' )
 
 #define char_0 ( '0' )
 #define char_1 ( '1' )
@@ -120,3 +122,6 @@
 #define char_gt   ( '>' )
 #define char_amp  ( '&' )
 #define char_pipe ( '|' )
+
+#define char_dquote ( '"' )
+#define char_quote  ( '\'' )

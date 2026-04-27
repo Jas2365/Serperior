@@ -35,8 +35,8 @@ i32 main(i32 argc, i8* argv[]) {
     lexer_init(src);
 
     // lex_prnt();
-
     lexer_tokenize();
+    lexer_token_log();
 
     lexer_print_tokens();
 

@@ -19,7 +19,7 @@
 typedef enum Token_Type {
 
     // identifier
-    TOKEN_IDENT,
+    TOKEN_IDENT = 0,
 
     // literals
     TOKEN_BOOL_LIT,
@@ -127,8 +127,6 @@ typedef enum Token_Type {
     TOKEN_EOF,          // end of file
     TOKEN_ERROR,
 
-    TOTAL_TOKENS
-
 } Token_Type;
 
 typedef struct Token {
@@ -145,9 +143,9 @@ typedef struct Token {
 
 typedef struct Lexer {
 
-    string    source;  // full source
-    const i8* start;   // start of the current token
-    const i8* current; // current scan position
+    string  source;  // full source
+    i8*     start;   // start of the current token
+    i8*     current; // current scan position
 
     i8* _end;
     i32 line;
@@ -169,7 +167,9 @@ null lexer_init(string source_file);
 null lexer_tokenize();
 null lexer_print_tokens();
 null Lexer_free();
-string token_name(Token_Type type);
+null lexer_token_log();
+null print_token(Token t);
+
 
 // =======================================
 null lex_prnt();

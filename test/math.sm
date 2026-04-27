@@ -1,5 +1,5 @@
-module math;
+import math;
 
-fn i64 add(i64 a, i64 b) {
-    return a + b;
+fn i32 main(i32 argc, string argv[]) {
+    return 0;
 }

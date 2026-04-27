@@ -28,13 +28,14 @@ typedef struct double_char {
 
 } double_char;
 
-extern Token_info Keywords[];
-extern s64 keyword_count;
+extern Token_info Token_Table[];
+extern Token_info* keyword_scan_table[];
+extern s64 keyword_scan_count;
 extern Token_Type Char_table[];
 extern s64 char_table_count;
 extern double_char Double_char_Table[];
 extern s64 double_char_table_count;
-
+extern string token_name[];
 extern u8 char_class[256];
 
 null lexer_util_info();
