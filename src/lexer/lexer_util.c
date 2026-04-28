@@ -56,13 +56,14 @@ double_char Double_char_Table[] = {
 
 s64 double_char_table_count = sizeof(Double_char_Table) / sizeof(Double_char_Table[0]);
 
-u8 char_class[256] = {
+u16 char_class[256] = {
     // whitespaces
     [ char_sp  ] = char_space,
     [ char_tab ] = char_space,
     [ char_cr  ] = char_space,
     [ char_nl  ] = char_newline,
-    [ char_sl  ] = char_slash | char_symbol,
+    [ char_sl  ] = char_slash  | char_symbol,
+    [ char_es  ] = char_escape | char_symbol,
     
     // letters
     [ char_a ] = char_alpha, [ char_b ] = char_alpha, [ char_c ] = char_alpha, [ char_d ] = char_alpha,

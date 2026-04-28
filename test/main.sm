@@ -1,7 +1,15 @@
 import io;
 
+struct Node {
+    i32 k;
+    i32 l;
+};
+
+Node ll = { .k = 23, .l = 65 };
+
 fn i32 main(i32 argc, string argv[]) {
     print("hello world" endl);
 
+    'KLAJF'
     return 0;
 }

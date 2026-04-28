@@ -22,14 +22,16 @@
 #define char_symbol  (1 << 5) //  + - *
 #define char_tick    (1 << 6) // '
 #define char_string  (1 << 7) // string ""
+#define char_escape  (1 << 8) // '\\'
 
-#define char_is(c, flag) (char_class[(u8)(c)] & (flag))
+#define char_is(c, flag) (char_class[(u16)(c)] & (flag))
 
 #define char_sp         ( ' '  )
 #define char_tab        ( '\t' )
 #define char_cr         ( '\r' )
 #define char_nl         ( '\n' )
 #define char_sl         ( '/'  )
+#define char_es         ( '\\'  )
 
 #define char_parenl     ( '(' )
 #define char_parenr     ( ')' )
