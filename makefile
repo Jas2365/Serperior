@@ -3,13 +3,13 @@ cxx = gcc
 src_dir = src
 out_dir = out
 
-inc = -Iinc \
-	  -Iinc/lists \
-	  -Iinc/string \
-	  -Iinc/file \
-	  -Iinc/lexer \
-	  -Iinc/ptr \
-	  -Iinc/arrays 
+inc = -Iinc 		\
+	  -Iinc/lists 	\
+	  -Iinc/string 	\
+	  -Iinc/file 	\
+	  -Iinc/lexer 	\
+	  -Iinc/ptr 	\
+	  -Iinc/arrays  
 
 srcs = $(wildcard $(src_dir)/*.c) $(wildcard $(src_dir)/**/*.c)
 
@@ -48,7 +48,7 @@ $(out_dir)/%.o : $(src_dir)/%.c | $(dirs)
 
 run:
 	@echo  ---- Running Project ---- 
-	@./$(target) test/math.sm
+	@./$(target) test/main.sm
 	@echo  ---- Ending  Project ---- 
 	
 clean:

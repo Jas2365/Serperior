@@ -4,7 +4,6 @@
 #include <lexer/lexer_defs.h>
 #include <lexer/lexer_util.h>
 
-#include <string.h> // memcmp
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -37,7 +36,7 @@ static inline null lexer_newline() {
 }
 
 static inline b8 is_alnum() {
-    return char_is(peek(), char_alpha) || char_is(peek(), char_digit);
+    return char_is(peek(), char_alpha | char_digit);
 }
 
 static inline b8 skip_comments() {

@@ -133,7 +133,7 @@
 
 // _Pop_
 #define array_pop(array) ({\
-    auto _array = to_ptr(array);   \
+    auto _array_ = to_ptr(array);   \
     _array_->buffer[--_array_->size];                   \
 })
 

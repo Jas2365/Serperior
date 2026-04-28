@@ -1,6 +1,6 @@
 #include <string/my_string.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string.h> // memcmp
 
 
 string make_string(const i8* lit) {

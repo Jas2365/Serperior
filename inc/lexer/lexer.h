@@ -18,115 +18,14 @@
 
 typedef enum Token_Type {
 
-    // identifier
-    TOKEN_IDENT = 0,
+    #define TOKEN_LITERAL(name, lex) name,
+    #define TOKEN_KEYWORD(name, lex) name,
+    #define TOKEN_SYMBOL(name, lex) name,
+    #define TOKEN_SPECIAL(name, lex) name,
 
-    // literals
-    TOKEN_BOOL_LIT,
-    TOKEN_INT_LIT,
-    TOKEN_FLOAT_LIT,
-    TOKEN_CHAR_LIT,
-    TOKEN_STRING_LIT,
-
-    // keywords
-    TOKEN_MODULE,
-    TOKEN_IMPORT,
+    #include <token_defs.h>
+    TOKEN_COUNT
     
-    TOKEN_FN,
-    TOKEN_RETURN,
-    
-    TOKEN_INTERNAL,
-    TOKEN_PERSIST,
-    
-    TOKEN_STRUCT,
-    TOKEN_UNION,
-    TOKEN_ENUM,
-    
-    TOKEN_WHILE,
-    TOKEN_FOR,
-    TOKEN_SWITCH,
-    TOKEN_IF,
-    TOKEN_ELSE,
-    
-    TOKEN_BREAK,
-    TOKEN_CONTINUE,
-    
-    TOKEN_TYPEOF,
-    TOKEN_TYPE,
-    
-    TOKEN_TRUE,
-    TOKEN_FALSE,
-    
-    TOKEN_CONST,
-
-    // data types
-    TOKEN_NULL,
-
-    TOKEN_I8,
-    TOKEN_I16,
-    TOKEN_I32,
-    TOKEN_I64,
-    
-    TOKEN_U8,
-    TOKEN_U16,
-    TOKEN_U32,
-    TOKEN_U64,
-    
-    TOKEN_F32,
-    TOKEN_F64,
-
-    TOKEN_BOOL,
-    TOKEN_CHAR,
-    TOKEN_STRING,
-
-    // Symbols
-    TOKEN_PAREN_L,      // ()
-    TOKEN_PAREN_R,
-    TOKEN_BRACKET_L,    // []
-    TOKEN_BRACKET_R,
-    TOKEN_BRACES_L,     // {}
-    TOKEN_BRACES_R,
-
-    TOKEN_DOT,
-    TOKEN_COMMA,
-
-    TOKEN_COLON,
-    TOKEN_SEMICOLON,
-
-    TOKEN_ASSIGN,
-
-    // Arithmetic
-    TOKEN_PLUS,
-    TOKEN_MINUS,
-    TOKEN_STAR,
-    TOKEN_SLASH,
-    TOKEN_PERCENT,
-
-    // Comparasion
-    TOKEN_EQ,
-    TOKEN_NEQ,
-    TOKEN_LT,
-    TOKEN_GT,
-    TOKEN_LTE,
-    TOKEN_GTE,
-
-    // Logical
-    TOKEN_AND,      // &&
-    TOKEN_OR,       // ||
-    TOKEN_BANG,     // !
-
-    // Bitwise
-    TOKEN_BIT_AMP,      // &
-    TOKEN_BIT_PIPE,     // |
-    TOKEN_BIT_TILDE,    // ~
-    TOKEN_BIT_CARET,    // ^
-    TOKEN_BIT_SHIFT_L,  // <<
-    TOKEN_BIT_SHIFT_R,  // >>
-
-    // Special
-    TOKEN_EOF,          // end of file
-    TOKEN_ERROR,
-
 } Token_Type;
 
 typedef struct Token {

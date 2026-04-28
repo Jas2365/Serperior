@@ -1,5 +1,7 @@
-import math;
+import io;
 
 fn i32 main(i32 argc, string argv[]) {
+    print("hello world" endl);
+
     return 0;
 }

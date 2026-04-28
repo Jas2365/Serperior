@@ -15,6 +15,7 @@ i32 main(i32 argc, i8* argv[]) {
 
     if(argc < 2) return 1;
 
+
     string src = read_string(argv[1]);
 
     printf(
