@@ -10,6 +10,7 @@
  * OR CONDITIONS OF ANY KIND, either express or implied.
  */
 
+#pragma once
 
 #include <ints.h>
 #include <defs.h>

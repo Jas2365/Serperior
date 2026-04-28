@@ -117,25 +117,29 @@ static Token lexer_scan_string() {
     while(!is_eof()) {
         char c = peek();
         if(char_is(c, char_newline)) return make_token(TOKEN_ERROR);
-        if(char_is(c, char_slash)) { advance(); advance(); continue; }
+        if(char_is(c, char_escape)) { advance(); advance(); continue; }
         if(char_is(c, char_string)) break; // closing "
         advance();
     } 
     if(is_eof()) return make_token(TOKEN_ERROR);
     advance(); // " consuming
-    return make_token(TOKEN_STRING);
+    return make_token(TOKEN_STRING_LIT);
 }
 static Token lexer_scan_char() {
     advance(); // opening '
     if(is_eof() || char_is(peek(), char_newline))
         return make_token(TOKEN_ERROR);
+        
+    while(!is_eof()) {
+        char c = peek();
+        if(char_is(c, char_newline)) return make_token(TOKEN_ERROR);
+       if(char_is(c, char_escape)) { advance(); advance(); continue; }
+       if(char_is(c, char_tick)) break;// closing '
+       advance(); 
+    }
+    if(is_eof()) return make_token(TOKEN_ERROR);    
     
-    if(char_is(peek(), char_slash)) {
-        advance(); advance();
-    } else advance();
-
-    if(peek() != char_quote) return make_token(TOKEN_ERROR);
-    advance(); // closing '
+    advance(); // consuming '
     return make_token(TOKEN_CHAR_LIT);    
 }
 static Token lexer_scan_symbol() {

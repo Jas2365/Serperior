@@ -15,7 +15,7 @@ typedef void null;
 // _Signed_
 typedef char   i8;
 typedef short i16;
-typedef int i32;
+typedef int   i32;
 
 #if defined (_WIN64) || defined(__LP64__)
 typedef long long i64;
@@ -31,7 +31,7 @@ typedef const i64 ci64;
 // _Unsigned_
 typedef unsigned char   u8;
 typedef unsigned short u16;
-typedef unsigned int u32;
+typedef unsigned int   u32;
 
 #if defined (_WIN64) || defined(__LP64__)
 typedef unsigned long long u64;
