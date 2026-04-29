@@ -15,7 +15,8 @@
  *  Macros default to no-op if not defined before including.
  *  all macro #undef'd at the bottom. 
  */
-#pragma once
+
+ #pragma once
 
 #define NODE_LITERAL_TABLE(X)\
     X(   NODE_IDENT         )\

@@ -28,7 +28,7 @@ typedef struct strvw {
 
 #define fmt_str "%.*s"
 
-#define string_lit(s) (string){ .str = s, .length = sizeof(s) -1 }
+#define str_lit(s) (string){ .str = s, .length = sizeof(s) -1 }
 
 string make_string(const i8* lit);
 

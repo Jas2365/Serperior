@@ -17,7 +17,7 @@
 #include <lexer/lexer.h>
 #include <ast/ast_defs.h>
 
-typedef enum node_type {
+typedef enum Node_Type {
 
     #define X(node) tok,
         NODE_LITERAL_TABLE     (X)
@@ -26,7 +26,7 @@ typedef enum node_type {
         NODE_DECLARATION_TABLE (X)
     #undef X
 
-} node_type;
+} Node_Type;
 
 // _Node_Structs_
 
@@ -70,3 +70,116 @@ typedef struct Field {
 } Field;
 
 // _Stmt_
+typedef struct Block {
+    List(Node) Stmts;
+} Block;
+
+typedef struct Return {
+    Node* Expr;
+} Return;
+
+typedef struct If {
+    Node* Cond;
+    Node* Then;
+    Node* Else;
+} If;
+
+typedef struct While {
+    Node* Cond;
+    Node* Body;
+} While;
+
+typedef struct For {
+    Node* Init;
+    Node* Cond;
+    Node* Step;
+    Node* Body;
+} For;
+
+typedef struct Decl_Stmt {
+    Token type;
+    Token name;
+    b8    is_const;
+    Node* init;
+} Decl_Stmt;
+
+typedef struct Expr_Stmt {
+    Node* expr;
+} Expr_Stmt;
+
+// _Decl_
+
+typedef struct Param {
+    Token type;
+    Token name;
+    b8 is_array;
+} Param;
+
+DEFINE_LIST(Param);
+
+typedef struct Fn_Decl {
+    Token return_type;
+    Token name;
+    List(Param) params;
+    Node* body;
+} Fn_Decl;
+
+typedef struct Struct_Decl {
+    Token name;
+    List(Param) fields;
+} Struct_Decl;
+
+typedef Struct_Decl Union_Decl;
+
+typedef struct Enum_Decl {
+    Token name;
+    List(Token) variants;
+} Enum_Decl;
+
+typedef struct Import {
+    Token module;
+} Import;
+
+typedef struct Program {
+
+    List(Node) imports;
+    List(Node) decls;
+
+} Program;
+
+// _Node_
+
+struct Node {
+    Node_Type type;
+    union {
+        // _Expr_
+        Ident       ident;
+        Int_lit     int_lit;
+        Float_lit   float_lit;
+        String_lit  string_lit;
+        Char_lit    char_lit;
+        Bool_lit    bool_lit;
+        Binary      binary;
+        Unary       unary;
+        Call        call;
+        Index       index;
+        Field       field;
+
+        // _Stmt_
+        Block       block;
+        Return      ret;
+        If          if_stmt;
+        While       while_stmt;
+        For         for_stmt;
+        Decl_Stmt   decl_stmt;
+        Expr_Stmt   expr_stmt;
+
+        // _Decl_
+        Fn_Decl     fn_decl;
+        Struct_Decl struct_decl;
+        Union_Decl  union_decl;
+        Enum_Decl   enum_decl;
+        Import      impt;
+        Program     program;
+    };
+};
