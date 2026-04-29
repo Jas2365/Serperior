@@ -9,114 +9,91 @@
  * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
  * OR CONDITIONS OF ANY KIND, either express or implied.
  */
-
-/**
- *  Include this file mulitple times with differnt file macro definitions.
- *  Macros default to no-op if not defined before including.
- *  all macro #undef'd at the bottom. 
- */
-
-#ifndef TOKEN_LITERAL
-#define TOKEN_LITERAL(t_name, t_lex)
-#endif
-
-#ifndef TOKEN_KEYWORD
-#define TOKEN_KEYWORD(t_name, t_lex)
-#endif
-
-#ifndef TOKEN_SYMBOL
-#define TOKEN_SYMBOL(t_name, t_lex)
-#endif
-
-#ifndef TOKEN_SPECIAL
-#define TOKEN_SPECIAL(t_name, t_lex)
-#endif
+#pragma once
 
 //             NAME                LEX_NAME
 // Literals
-TOKEN_LITERAL( TOKEN_IDENT      ,  "ident"      )
-TOKEN_LITERAL( TOKEN_BOOL_LIT   ,  "bool_lit"   )
-TOKEN_LITERAL( TOKEN_INT_LIT    ,  "int_lit"    )
-TOKEN_LITERAL( TOKEN_FLOAT_LIT  ,  "float_lit"  )
-TOKEN_LITERAL( TOKEN_CHAR_LIT   ,  "char_lit"   )
-TOKEN_LITERAL( TOKEN_STRING_LIT ,  "string_lit" )
+#define TOKEN_LITERAL_TABLE(X)            \
+    X( TOKEN_IDENT      ,  "ident"      ) \
+    X( TOKEN_INT_LIT    ,  "int_lit"    ) \
+    X( TOKEN_FLOAT_LIT  ,  "float_lit"  ) \
+    X( TOKEN_CHAR_LIT   ,  "char_lit"   ) \
+    X( TOKEN_STRING_LIT ,  "string_lit" )
 
 // Keyword
-TOKEN_KEYWORD( TOKEN_MODULE    ,   "module"    )
-TOKEN_KEYWORD( TOKEN_IMPORT    ,   "import"    )
-TOKEN_KEYWORD( TOKEN_FN        ,   "fn"        )
-TOKEN_KEYWORD( TOKEN_RETURN    ,   "return"    )
-TOKEN_KEYWORD( TOKEN_INTERNAL  ,   "internal"  )
-TOKEN_KEYWORD( TOKEN_PERSIST   ,   "persist"   )
-TOKEN_KEYWORD( TOKEN_STRUCT    ,   "struct"    )
-TOKEN_KEYWORD( TOKEN_UNION     ,   "union"     )
-TOKEN_KEYWORD( TOKEN_ENUM      ,   "enum"      )
-TOKEN_KEYWORD( TOKEN_WHILE     ,   "while"     )
-TOKEN_KEYWORD( TOKEN_FOR       ,   "for"       )
-TOKEN_KEYWORD( TOKEN_SWITCH    ,   "switch"    )
-TOKEN_KEYWORD( TOKEN_IF        ,   "if"        )
-TOKEN_KEYWORD( TOKEN_ELSE      ,   "else"      )
-TOKEN_KEYWORD( TOKEN_BREAK     ,   "break"     )
-TOKEN_KEYWORD( TOKEN_CONTINUE  ,   "continue"  )
-TOKEN_KEYWORD( TOKEN_TYPEOF    ,   "typeof"    )
-TOKEN_KEYWORD( TOKEN_TYPE      ,   "type"      )
-TOKEN_KEYWORD( TOKEN_TRUE      ,   "true"      )
-TOKEN_KEYWORD( TOKEN_FALSE     ,   "false"     )
-TOKEN_KEYWORD( TOKEN_CONST     ,   "const"     )
-TOKEN_KEYWORD( TOKEN_NULL      ,   "null"      )
-TOKEN_KEYWORD( TOKEN_I8        ,   "i8"        )
-TOKEN_KEYWORD( TOKEN_I16       ,   "i16"       )
-TOKEN_KEYWORD( TOKEN_I32       ,   "i32"       )
-TOKEN_KEYWORD( TOKEN_I64       ,   "i64"       )
-TOKEN_KEYWORD( TOKEN_U8        ,   "u8"        )
-TOKEN_KEYWORD( TOKEN_U16       ,   "u16"       )
-TOKEN_KEYWORD( TOKEN_U32       ,   "u32"       )
-TOKEN_KEYWORD( TOKEN_U64       ,   "u64"       )
-TOKEN_KEYWORD( TOKEN_F32       ,   "f32"       )
-TOKEN_KEYWORD( TOKEN_F64       ,   "f64"       )
-TOKEN_KEYWORD( TOKEN_BOOL      ,   "bool"      )
-TOKEN_KEYWORD( TOKEN_CHAR      ,   "char"      )
-TOKEN_KEYWORD( TOKEN_STRING    ,   "string"    )
+#define TOKEN_KEYWORD_TABLE(X)          \
+    X( TOKEN_MODULE    ,   "module"    )\
+    X( TOKEN_IMPORT    ,   "import"    )\
+    X( TOKEN_FN        ,   "fn"        )\
+    X( TOKEN_RETURN    ,   "return"    )\
+    X( TOKEN_INTERNAL  ,   "internal"  )\
+    X( TOKEN_PERSIST   ,   "persist"   )\
+    X( TOKEN_STRUCT    ,   "struct"    )\
+    X( TOKEN_UNION     ,   "union"     )\
+    X( TOKEN_ENUM      ,   "enum"      )\
+    X( TOKEN_WHILE     ,   "while"     )\
+    X( TOKEN_FOR       ,   "for"       )\
+    X( TOKEN_SWITCH    ,   "switch"    )\
+    X( TOKEN_IF        ,   "if"        )\
+    X( TOKEN_ELSE      ,   "else"      )\
+    X( TOKEN_BREAK     ,   "break"     )\
+    X( TOKEN_CONTINUE  ,   "continue"  )\
+    X( TOKEN_TYPEOF    ,   "typeof"    )\
+    X( TOKEN_TYPE      ,   "type"      )\
+    X( TOKEN_TRUE      ,   "true"      )\
+    X( TOKEN_FALSE     ,   "false"     )\
+    X( TOKEN_CONST     ,   "const"     )\
+    X( TOKEN_NULL      ,   "null"      )\
+    X( TOKEN_I8        ,   "i8"        )\
+    X( TOKEN_I16       ,   "i16"       )\
+    X( TOKEN_I32       ,   "i32"       )\
+    X( TOKEN_I64       ,   "i64"       )\
+    X( TOKEN_U8        ,   "u8"        )\
+    X( TOKEN_U16       ,   "u16"       )\
+    X( TOKEN_U32       ,   "u32"       )\
+    X( TOKEN_U64       ,   "u64"       )\
+    X( TOKEN_F32       ,   "f32"       )\
+    X( TOKEN_F64       ,   "f64"       )\
+    X( TOKEN_BOOL      ,   "bool"      )\
+    X( TOKEN_CHAR      ,   "char"      )\
+    X( TOKEN_STRING    ,   "string"    )
 
 // Symbol
-TOKEN_SYMBOL( TOKEN_PAREN_L     , "("    )
-TOKEN_SYMBOL( TOKEN_PAREN_R     , ")"    )
-TOKEN_SYMBOL( TOKEN_BRACKET_L   , "["    )
-TOKEN_SYMBOL( TOKEN_BRACKET_R   , "]"    )
-TOKEN_SYMBOL( TOKEN_BRACES_L    , "{"    )
-TOKEN_SYMBOL( TOKEN_BRACES_R    , "}"    )
-TOKEN_SYMBOL( TOKEN_DOT         , "."    )
-TOKEN_SYMBOL( TOKEN_COMMA       , ","    )
-TOKEN_SYMBOL( TOKEN_COLON       , ":"    )
-TOKEN_SYMBOL( TOKEN_SEMICOLON   , ";"    )
-TOKEN_SYMBOL( TOKEN_ASSIGN      , "="    )
-TOKEN_SYMBOL( TOKEN_PLUS        , "+"    )
-TOKEN_SYMBOL( TOKEN_MINUS       , "-"    )
-TOKEN_SYMBOL( TOKEN_STAR        , "*"    )
-TOKEN_SYMBOL( TOKEN_SLASH       , "/"    )
-TOKEN_SYMBOL( TOKEN_PERCENT     , "%"    )
-TOKEN_SYMBOL( TOKEN_EQ          , "=="   )
-TOKEN_SYMBOL( TOKEN_NEQ         , "!="   )
-TOKEN_SYMBOL( TOKEN_LT          , "<"    )
-TOKEN_SYMBOL( TOKEN_GT          , ">"    )
-TOKEN_SYMBOL( TOKEN_LTE         , "<="   )
-TOKEN_SYMBOL( TOKEN_GTE         , ">="   )
-TOKEN_SYMBOL( TOKEN_AND         , "&&"   )
-TOKEN_SYMBOL( TOKEN_OR          , "||"   )
-TOKEN_SYMBOL( TOKEN_BANG        , "!"    )
-TOKEN_SYMBOL( TOKEN_BIT_AMP     , "&"    )
-TOKEN_SYMBOL( TOKEN_BIT_PIPE    , "|"    )
-TOKEN_SYMBOL( TOKEN_BIT_TILDE   , "~"    )
-TOKEN_SYMBOL( TOKEN_BIT_CARET   , "^"    )
-TOKEN_SYMBOL( TOKEN_BIT_SHIFT_L , "<<"   )
-TOKEN_SYMBOL( TOKEN_BIT_SHIFT_R , ">>"   )
+#define TOKEN_SYMBOL_TABLE(X)      \
+    X( TOKEN_PAREN_L     , "("    )\
+    X( TOKEN_PAREN_R     , ")"    )\
+    X( TOKEN_BRACKET_L   , "["    )\
+    X( TOKEN_BRACKET_R   , "]"    )\
+    X( TOKEN_BRACES_L    , "{"    )\
+    X( TOKEN_BRACES_R    , "}"    )\
+    X( TOKEN_DOT         , "."    )\
+    X( TOKEN_COMMA       , ","    )\
+    X( TOKEN_COLON       , ":"    )\
+    X( TOKEN_SEMICOLON   , ";"    )\
+    X( TOKEN_ASSIGN      , "="    )\
+    X( TOKEN_PLUS        , "+"    )\
+    X( TOKEN_MINUS       , "-"    )\
+    X( TOKEN_STAR        , "*"    )\
+    X( TOKEN_SLASH       , "/"    )\
+    X( TOKEN_PERCENT     , "%"    )\
+    X( TOKEN_EQ          , "=="   )\
+    X( TOKEN_NEQ         , "!="   )\
+    X( TOKEN_LT          , "<"    )\
+    X( TOKEN_GT          , ">"    )\
+    X( TOKEN_LTE         , "<="   )\
+    X( TOKEN_GTE         , ">="   )\
+    X( TOKEN_AND         , "&&"   )\
+    X( TOKEN_OR          , "||"   )\
+    X( TOKEN_BANG        , "!"    )\
+    X( TOKEN_BIT_AMP     , "&"    )\
+    X( TOKEN_BIT_PIPE    , "|"    )\
+    X( TOKEN_BIT_TILDE   , "~"    )\
+    X( TOKEN_BIT_CARET   , "^"    )\
+    X( TOKEN_BIT_SHIFT_L , "<<"   )\
+    X( TOKEN_BIT_SHIFT_R , ">>"   )
 
 // Special
-TOKEN_SPECIAL( TOKEN_EOF      ,  "eof"    )
-TOKEN_SPECIAL( TOKEN_ERROR    ,  "error"  )
-
-#undef TOKEN_LITERAL
-#undef TOKEN_KEYWORD
-#undef TOKEN_SYMBOL
-#undef TOKEN_SPECIAL
+#define TOKEN_SPECIAL_TABLE(X)     \
+    X( TOKEN_EOF      ,  "eof"    )\
+    X( TOKEN_ERROR    ,  "error"  )
 

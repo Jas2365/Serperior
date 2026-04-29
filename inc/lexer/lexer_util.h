@@ -23,7 +23,6 @@ typedef struct Token_info {
 
 typedef struct double_char {
     char a, b;
-    Token_Type single;
     Token_Type compound;
 
 } double_char;

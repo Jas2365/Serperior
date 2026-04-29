@@ -1,23 +1,24 @@
 
 #include <lexer/lexer_util.h>
 #include <lexer/lexer_defs.h>
+#include <lexer/token_defs.h>
+
 
 Token_info Token_Table[] = {
-    
-    #define TOKEN_LITERAL(t_name, t_lex) [t_name] = { .name = { .str = t_lex, .length = sizeof(t_lex) -1}, .type = t_name},
-    #define TOKEN_KEYWORD(t_name, t_lex) [t_name] = { .name = { .str = t_lex, .length = sizeof(t_lex) -1}, .type = t_name},
-    #define TOKEN_SYMBOL(t_name, t_lex)  [t_name] = { .name = { .str = t_lex, .length = sizeof(t_lex) -1}, .type = t_name},
-    #define TOKEN_SPECIAL(t_name, t_lex) [t_name] = { .name = { .str = t_lex, .length = sizeof(t_lex) -1}, .type = t_name},
-
-    #include <token_defs.h>
+    #define X(t_name, t_lex) [t_name] = { .name = { .str = t_lex, .length = sizeof(t_lex) -1}, .type = t_name},
+      TOKEN_LITERAL_TABLE(X)
+      TOKEN_KEYWORD_TABLE(X)
+      TOKEN_SYMBOL_TABLE(X)
+      TOKEN_SPECIAL_TABLE(X)
+    #undef X
 };
 
 s64 Token_Table_count = sizeof(Token_Table) / sizeof(Token_Table[0]);
 
 Token_info* keyword_scan_table[] = {
-    #define TOKEN_KEYWORD(t_name, t_lex) &Token_Table[t_name],
-    
-    #include <token_defs.h>
+    #define X(t_name, t_lex) &Token_Table[t_name],
+      TOKEN_KEYWORD_TABLE(X)
+    #undef X
 };
 s64 keyword_scan_count = sizeof(keyword_scan_table) / sizeof(keyword_scan_table[0]);
 
@@ -36,22 +37,30 @@ Token_Type Char_table[] = {
     [ char_plus      ] = TOKEN_PLUS,
     [ char_minus     ] = TOKEN_MINUS,
     [ char_star      ] = TOKEN_STAR,
-    [ char_slash     ] = TOKEN_SLASH,
+    [ char_sl        ] = TOKEN_SLASH,
     [ char_percent   ] = TOKEN_PERCENT,
     [ char_tilde     ] = TOKEN_BIT_TILDE,
     [ char_caret     ] = TOKEN_BIT_CARET,
+    
+    [ char_eq        ] = TOKEN_ASSIGN,
+    [ char_bang      ] = TOKEN_BANG,
+    [ char_lt        ] = TOKEN_LT,
+    [ char_gt        ] = TOKEN_GT,
+    [ char_amp       ] = TOKEN_BIT_AMP,
+    [ char_pipe      ] = TOKEN_BIT_PIPE,
+
 };
 s64 char_table_count = sizeof(Char_table) / sizeof(Char_table[0]);
 
 double_char Double_char_Table[] = {
-    { .a = char_eq   , .b = char_eq   , .single = TOKEN_ASSIGN,   .compound = TOKEN_EQ          },
-    { .a = char_bang , .b = char_eq   , .single = TOKEN_BANG,     .compound = TOKEN_NEQ         },
-    { .a = char_lt   , .b = char_eq   , .single = TOKEN_LT,       .compound = TOKEN_LTE         },
-    { .a = char_gt   , .b = char_eq   , .single = TOKEN_GT,       .compound = TOKEN_GTE         },
-    { .a = char_lt   , .b = char_lt   , .single = TOKEN_LT,       .compound = TOKEN_BIT_SHIFT_L },
-    { .a = char_gt   , .b = char_gt   , .single = TOKEN_GT,       .compound = TOKEN_BIT_SHIFT_R },
-    { .a = char_amp  , .b = char_amp  , .single = TOKEN_BIT_AMP,  .compound = TOKEN_AND         },
-    { .a = char_pipe , .b = char_pipe , .single = TOKEN_BIT_PIPE, .compound = TOKEN_OR          },
+    { .a = char_eq   , .b = char_eq   , .compound = TOKEN_EQ          },
+    { .a = char_bang , .b = char_eq   , .compound = TOKEN_NEQ         },
+    { .a = char_lt   , .b = char_eq   , .compound = TOKEN_LTE         },
+    { .a = char_gt   , .b = char_eq   , .compound = TOKEN_GTE         },
+    { .a = char_lt   , .b = char_lt   , .compound = TOKEN_BIT_SHIFT_L },
+    { .a = char_gt   , .b = char_gt   , .compound = TOKEN_BIT_SHIFT_R },
+    { .a = char_amp  , .b = char_amp  , .compound = TOKEN_AND         },
+    { .a = char_pipe , .b = char_pipe , .compound = TOKEN_OR          },
 };
 
 s64 double_char_table_count = sizeof(Double_char_Table) / sizeof(Double_char_Table[0]);
@@ -128,12 +137,12 @@ u16 char_class[256] = {
 
 
 string token_name[] = {
-    #define TOKEN_LITERAL(t_name, t_lex) [t_name] = { .str = #t_name, .length = sizeof(#t_name) -1 },
-    #define TOKEN_KEYWORD(t_name, t_lex) [t_name] = { .str = #t_name, .length = sizeof(#t_name) -1 },
-    #define TOKEN_SYMBOL(t_name, t_lex) [t_name] = { .str = #t_name, .length = sizeof(#t_name) -1 },
-    #define TOKEN_SPECIAL(t_name, t_lex) [t_name] = { .str = #t_name, .length = sizeof(#t_name) -1 },
-
-    #include <token_defs.h>
+    #define X(t_name, t_lex) [t_name] = { .str = #t_name, .length = sizeof(#t_name) -1 },
+      TOKEN_LITERAL_TABLE(X)
+      TOKEN_KEYWORD_TABLE(X)
+      TOKEN_SYMBOL_TABLE(X)
+      TOKEN_SPECIAL_TABLE(X)
+    #undef X
 };
 
 s64 token_name_count = sizeof(token_name) / sizeof(token_name[0]);
@@ -141,9 +150,9 @@ s64 token_name_count = sizeof(token_name) / sizeof(token_name[0]);
 null lexer_util_info() {
      printf(
         "Lexer Util Info"                   endl
-        "token table count          : %d"   endl 
-        "token name count           : %d"   endl 
-        "keywords count             : %d"   endl 
+        "token table count          : %d"   endl
+        "token name count           : %d"   endl
+        "keywords count             : %d"   endl
         "char_table count           : %d"   endl
         "double char table count    : %d"   endl,
         Token_Table_count,

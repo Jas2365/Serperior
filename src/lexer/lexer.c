@@ -63,9 +63,9 @@ static inline b8 skip_comments() {
 static null skip_whitespaces() {
     while(!is_eof()) {
         char c = peek();
-        if      (char_is(c, char_space))   advance();
+        if      (char_is(c, char_space))     advance();
         else if (char_is(c, char_newline)) { lexer_newline(); advance(); }
-        else if (char_is(c, char_slash))   {if(!skip_comments()) break;}
+        else if (char_is(c, char_slash))   { if(!skip_comments()) break; }
         else break;
     }
 }
@@ -105,7 +105,7 @@ static Token lexer_scan_ident() {
 
 static Token lexer_scan_number() {
     while(!is_eof() && char_is(peek(), char_digit)) advance();
-    if(peek() == char_dot) {
+    if(advance() == char_dot) {
         while(!is_eof() && char_is(peek(), char_digit)) advance();
         return make_token(TOKEN_FLOAT_LIT);
     }
@@ -144,21 +144,34 @@ static Token lexer_scan_char() {
 }
 static Token lexer_scan_symbol() {
 
-    char c = advance();
-    // double char table
+    char c1 = advance(); char c2 = peek();
+
     for(i32 i = 0; i < double_char_table_count; i++) {
         const double_char* dc = &Double_char_Table[i];
-        if(dc->a == c){
-            if(peek() == dc->b) {
-                advance();
-                return make_token(dc->compound);
-            }
-            return make_token(dc->single);
+        if(c1 == dc->a && c2 == dc->b) {
+            advance();
+            return make_token(dc->compound);
         }
     }
+    
+
+
+    // char c = advance();
+    // // double char table
+    // for(i32 i = 0; i < double_char_table_count; i++) {
+    //     const double_char* dc = &Double_char_Table[i];
+    //     if(dc->a == c){
+    //         if(peek() == dc->b) {
+    //             advance();
+    //             return make_token(dc->compound);
+    //         }
+    //         return make_token(dc->single);
+    //     }
+    // }
 
     // single char table
-    Token_Type type = Char_table[(u8)c];
+    
+    Token_Type type = Char_table[(u8)c1];
     if(type) return make_token(type);
     return make_token(TOKEN_ERROR);
 }

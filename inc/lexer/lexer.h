@@ -16,15 +16,16 @@
 #include <defs.h>
 #include <file/my_file.h>
 #include <lists/my_list.h>
+#include <lexer/token_defs.h>
 
 typedef enum Token_Type {
 
-    #define TOKEN_LITERAL(name, lex) name,
-    #define TOKEN_KEYWORD(name, lex) name,
-    #define TOKEN_SYMBOL(name, lex) name,
-    #define TOKEN_SPECIAL(name, lex) name,
-
-    #include <token_defs.h>
+    #define X(name, lex) name,
+    TOKEN_LITERAL_TABLE  (X)
+    TOKEN_KEYWORD_TABLE  (X)
+    TOKEN_SYMBOL_TABLE   (X)
+    TOKEN_SPECIAL_TABLE  (X)
+    #undef X
     TOKEN_COUNT
     
 } Token_Type;

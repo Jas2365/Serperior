@@ -1,4 +1,4 @@
-import io;
+/* import io;
 
 struct Node {
     i32 k;
@@ -9,7 +9,72 @@ Node ll = { .k = 23, .l = 65 };
 
 fn i32 main(i32 argc, string argv[]) {
     print("hello world" endl);
-
+    a % b
     'KLAJF'
     return 0;
+} */
+ident 
+true
+23
+0.45
+'k'
+"hello"
+
+module
+import
+fn
+return
+internal 
+persist
+struct 
+union 
+enum 
+while 
+for 
+switch 
+if 
+else 
+break
+continue
+typeof 
+type 
+true 
+false 
+const 
+null 
+i8 i16 i32 i64 
+u8 u16 u32 u64 
+f32 f64 
+char string 
+
+(
+)
+[
+]
+{
 }
+.
+,
+:
+;
+=
++
+-
+*
+/
+%
+==
+!=
+<
+>
+<=
+>=
+&&
+||
+!
+&
+|
+~
+^
+<<
+>>
