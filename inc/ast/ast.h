@@ -19,7 +19,7 @@
 
 typedef enum Node_Type {
 
-    #define X(node) tok,
+    #define X(node) node,
         NODE_LITERAL_TABLE     (X)
         NODE_OPERATION_TABLE   (X)
         NODE_STATEMENT_TABLE   (X)
@@ -75,44 +75,44 @@ typedef struct Block {
 } Block;
 
 typedef struct Return {
-    Node* Expr;
+    Token token;
+    Node* expr;
 } Return;
 
 typedef struct If {
-    Node* Cond;
-    Node* Then;
-    Node* Else;
+    Token token;
+    Node* cond;
+    Node* then_branch;
+    Node* else_branch;
 } If;
 
 typedef struct While {
-    Node* Cond;
-    Node* Body;
+    Token token;
+    Node* cond;
+    Node* body;
 } While;
 
 typedef struct For {
-    Node* Init;
-    Node* Cond;
-    Node* Step;
-    Node* Body;
+    Token token;
+    Node* init;
+    Node* cond;
+    Node* step;
+    Node* body;
 } For;
 
-typedef struct Decl_Stmt {
-    Token type;
-    Token name;
-    b8    is_const;
-    Node* init;
-} Decl_Stmt;
+typedef struct Break {
+    Token token;
+} Break;
 
-typedef struct Expr_Stmt {
-    Node* expr;
-} Expr_Stmt;
+typedef struct Continue {
+    Token token;
+} Continue;
 
 // _Decl_
 
 typedef struct Param {
     Token type;
     Token name;
-    b8 is_array;
 } Param;
 
 DEFINE_LIST(Param);
@@ -124,16 +124,33 @@ typedef struct Fn_Decl {
     Node* body;
 } Fn_Decl;
 
+typedef struct Struct_field {
+    Token type;
+    Token name;
+} Struct_field;
+
+DEFINE_LIST(Struct_field);
+
 typedef struct Struct_Decl {
     Token name;
-    List(Param) fields;
+    List(Struct_field) fields;
 } Struct_Decl;
 
-typedef Struct_Decl Union_Decl;
+typedef struct Union_Decl {
+    Token name;
+    List(Struct_field) fields;
+} Union_Decl;
+
+typedef struct Enum_member {
+    Token name;
+    u64 value;
+} Enum_member;
+
+DEFINE_LIST(Enum_member);
 
 typedef struct Enum_Decl {
     Token name;
-    List(Token) variants;
+    List(Enum_member) members;
 } Enum_Decl;
 
 typedef struct Import {
@@ -142,8 +159,7 @@ typedef struct Import {
 
 typedef struct Program {
 
-    List(Node) imports;
-    List(Node) decls;
+    List(Node) declarations;
 
 } Program;
 
@@ -159,6 +175,7 @@ struct Node {
         String_lit  string_lit;
         Char_lit    char_lit;
         Bool_lit    bool_lit;
+
         Binary      binary;
         Unary       unary;
         Call        call;
@@ -171,8 +188,8 @@ struct Node {
         If          if_stmt;
         While       while_stmt;
         For         for_stmt;
-        Decl_Stmt   decl_stmt;
-        Expr_Stmt   expr_stmt;
+        Break       break_stmt;
+        Continue    continue_stmt;
 
         // _Decl_
         Fn_Decl     fn_decl;

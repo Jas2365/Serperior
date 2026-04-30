@@ -4,12 +4,13 @@ src_dir = src
 out_dir = out
 
 inc = -Iinc 		\
+	  -Iinc/ptr 	\
 	  -Iinc/lists 	\
+	  -Iinc/arrays  \
 	  -Iinc/string 	\
 	  -Iinc/file 	\
 	  -Iinc/lexer 	\
-	  -Iinc/ptr 	\
-	  -Iinc/arrays  
+	  -Iinc/ast  	\
 
 srcs = $(wildcard $(src_dir)/*.c) $(wildcard $(src_dir)/**/*.c)
 
@@ -28,7 +29,7 @@ dirs := $(sort $(dir $(objs)))
 
 target = out/lexer.exe
 
-all: clean build run
+all: build run
 
 build: $(objs) $(target)
 
