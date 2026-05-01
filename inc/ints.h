@@ -10,6 +10,8 @@
  * OR CONDITIONS OF ANY KIND, either express or implied.
  */
 
+#pragma once
+
 typedef void null;
 
 // _Signed_

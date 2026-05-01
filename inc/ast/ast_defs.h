@@ -48,6 +48,8 @@
     X(  NODE_IF               )\
     X(  NODE_WHILE            )\
     X(  NODE_FOR              )\
+    X(  NODE_DECL_STMT        )\
+    X(  NODE_EXPR_STMT        )\
     X(  NODE_BREAK            )\
     X(  NODE_CONTINUE         )
 
@@ -58,4 +60,6 @@
     X(  NODE_UNION_DECL         )\
     X(  NODE_ENUM_DECL          )\
     X(  NODE_IMPORT             )\
-    X(  NODE_PROGRAM            )
+    X(  NODE_MODULE_INTERFACE   )\
+    X(  NODE_MODULE_IMPL        )\
+    X(  NODE_ENTRY_POINT        )

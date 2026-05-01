@@ -33,7 +33,7 @@
     X( TOKEN_ENUM      ,   "enum"      )\
     X( TOKEN_WHILE     ,   "while"     )\
     X( TOKEN_FOR       ,   "for"       )\
-/*X( TOKEN_SWITCH    ,   "switch"    ) */\
+  /*X( TOKEN_SWITCH    ,   "switch"    ) */\
     X( TOKEN_IF        ,   "if"        )\
     X( TOKEN_ELSE      ,   "else"      )\
     X( TOKEN_BREAK     ,   "break"     )\

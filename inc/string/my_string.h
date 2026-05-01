@@ -16,6 +16,8 @@
 #include <ints.h>
 #include <defs.h>
 
+#include <lists/my_list.h>
+
 typedef struct string {
     u64 length;
     i8* str; 
@@ -25,6 +27,8 @@ typedef struct strvw {
     u64 length;
     const i8* str;
 } strvw;
+
+DEFINE_LIST(string);
 
 #define fmt_str "%.*s"
 
