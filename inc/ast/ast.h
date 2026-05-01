@@ -128,28 +128,28 @@ typedef struct Fn_Decl {
     Token name;
     List(Param) params;
     Node* body;
-    Visibility visibility;
+    b8 is_internal;
     b8 has_body;
 } Fn_Decl;
 
 typedef struct Struct_Decl {
     Token name;
     List(Param) fields;
-    Visibility visibility;
+    b8 is_internal;
     b8 is_opaque;
 } Struct_Decl;
 
 typedef struct Union_Decl {
     Token name;
     List(Param) fields;
-    Visibility visibility;
+    b8 is_internal;
     b8 is_opaque;
 } Union_Decl;
 
 typedef struct Enum_Decl {
     Token name;
     List(Token) variants;
-    Visibility visibility;
+    b8 is_internal;
 } Enum_Decl;
 
 typedef struct Import {
@@ -162,7 +162,6 @@ typedef struct Import {
 typedef struct Module_Interface {
     Token module_name;
     List(Node) imports;
-    List(Node) exports;
     List(Node) declarations;
 } Module_Interface;
 
