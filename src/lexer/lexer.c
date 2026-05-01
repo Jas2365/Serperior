@@ -105,7 +105,8 @@ static Token lexer_scan_ident() {
 
 static Token lexer_scan_number() {
     while(!is_eof() && char_is(peek(), char_digit)) advance();
-    if(advance() == char_dot) {
+    if(peek() == char_dot) {
+        advance();
         while(!is_eof() && char_is(peek(), char_digit)) advance();
         return make_token(TOKEN_FLOAT_LIT);
     }

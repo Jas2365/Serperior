@@ -259,7 +259,6 @@ static node_free_fn node_free_table[] = {
     [   NODE_STRUCT_DECL    ] = free_struct_decl ,
     [   NODE_UNION_DECL     ] = free_union_decl  ,
     [   NODE_ENUM_DECL      ] = free_enum_decl   ,
-    [   NODE_PROGRAM        ] = free_program     ,
 };
 
 null node_free_recursive(Node* n) {
@@ -270,3 +269,6 @@ null node_free_recursive(Node* n) {
     free(n);
 }
 
+null ast_destroy(Node* root) {
+    node_free_recursive(root);
+}

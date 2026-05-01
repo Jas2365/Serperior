@@ -88,13 +88,13 @@
 })
 
 #define array_first_safe(array) ({                      \
-    auto _array_ to_ptr(array);    \
+    auto _array_ = to_ptr(array);    \
     _array_->size ? _array_->buffer[0]                  \
                   :  nullptr;                           \
 })
 
 #define array_last_safe(array) ({                       \
-    auto _array_ to_ptr(array);    \
+    auto _array_ = to_ptr(array);    \
     _array_->size                                       \
     ? _array_->buffer[_array_->size -1]                 \
     :  nullptr;                                         \
@@ -217,7 +217,7 @@
 // =================================================================
 
 // _Stack_Array_
-#define arrya_reset(array) do {   \
+#define array_reset(array) do {   \
     array = _null_array_(array);  \
 } while(0)
 

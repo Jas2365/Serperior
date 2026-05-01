@@ -28,7 +28,7 @@ typedef struct Symbol_Metadata {
 DEFINE_LIST(Symbol_Metadata);
 
 typedef struct Module_Metadata {
-    u32 magic;
+    u32 magic;              // 0x534D4920 "SMI"
     u16 version;
     string module_name;
     u64 symbol_count;
