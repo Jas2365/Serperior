@@ -124,8 +124,8 @@ null ast_walk_module_interface(Module_Interface* iface, AST_Visitor* visitor, nu
     list_each(iface->imports, i) {
         ast_walk(&list_get(iface->imports, i), visitor, ctx);
     }
-    list_each(iface->exports, i) {
-        ast_walk(&list_get(iface->exports, i), visitor, ctx);
+    list_each(iface->declarations, i) {
+        ast_walk(&list_get(iface->declarations, i), visitor, ctx);
     }
 }
 

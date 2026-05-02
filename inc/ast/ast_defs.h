@@ -63,3 +63,6 @@
     X(  NODE_MODULE_INTERFACE   )\
     X(  NODE_MODULE_IMPL        )\
     X(  NODE_ENTRY_POINT        )
+
+#define DECL_CONST      (1 << 0)
+#define DECL_INTERNAL   (1 << 1)

@@ -44,11 +44,10 @@ Node* make_continue    (Token token);
 
 // _Declaration_Constructors_
 Node* make_fn_decl     (Token return_type, Token name, List(Param) params, Node* body);
-Node* make_struct_decl (Token name, List(Struct_field) fields);
-Node* make_union_decl  (Token name, List(Struct_field) fields);
-Node* make_enum_decl   (Token name, List(Enum_member) members);
+Node* make_struct_decl (Token name, List(Param) fields);
+Node* make_union_decl  (Token name, List(Param) fields);
+Node* make_enum_decl   (Token name, List(Token) variants);
 Node* make_import      (Token module);
-Node* make_program     (List(Node) declarations);
 
 // _Destruction_
 null ast_destroy(Node* root);

@@ -137,34 +137,28 @@ Node* make_fn_decl(Token return_type, Token name, List(Param) params, Node* body
     n->fn_decl = (Fn_Decl) {.return_type = return_type, .name = name, .params = params, .body = body};
     return n;
 }
-Node* make_struct_decl(Token name, List(Struct_field) fields) {
+Node* make_struct_decl(Token name, List(Param) fields) {
     Node* n = alloc_node();
     n->type = NODE_STRUCT_DECL;
     n->struct_decl = (Struct_Decl) {.name = name, .fields = fields};
     return n;
 }
-Node* make_union_decl(Token name, List(Struct_field) fields) {
+Node* make_union_decl(Token name, List(Param) fields) {
     Node* n = alloc_node();
     n->type = NODE_UNION_DECL;
     n->union_decl = (Union_Decl) {.name = name, .fields = fields};
     return n;
 }
-Node* make_enum_decl(Token name, List(Enum_member) members) {
+Node* make_enum_decl(Token name, List(Token) variants) {
     Node* n = alloc_node();
     n->type = NODE_ENUM_DECL;
-    n->enum_decl = (Enum_Decl) {.name = name, .members = members};
+    n->enum_decl = (Enum_Decl) {.name = name, .variants = variants};
     return n;
 }
 Node* make_import(Token module) {
     Node* n = alloc_node();
     n->type = NODE_IMPORT;
     n->impt = (Import) {.module = module};
-    return n;
-}
-Node* make_program(List(Node) declarations) {
-    Node* n = alloc_node();
-    n->type = NODE_PROGRAM;
-    n->program = (Program) {.declarations = declarations};
     return n;
 }
 
@@ -234,15 +228,9 @@ static null free_union_decl(Node* n) {
     list_free(n->union_decl.fields);
 }
 static null free_enum_decl(Node* n) {
-    list_free(n->enum_decl.members);
+    list_free(n->enum_decl.variants);
 }
 
-static null free_program(Node* n) {
-    list_each(n->program.declarations, i) {
-        node_free_recursive(&list_get(n->program.declarations, i));
-    }
-    list_free(n->program.declarations);
-}
 
 static node_free_fn node_free_table[] = {
     [   NODE_BINARY         ] = free_binary      ,
